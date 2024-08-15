@@ -19,5 +19,31 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
 3. Look at the missing values in the data. We use the isnull() and sum() functions to determine missing values in each report file.
         
         '''file_name.isnull().sum()'''
-4. Let us do the data cleaning by dropping the columns missing values. We use the '''drop()''' function to achieve this.
+4. Let us do the data cleaning by dropping the unnamed columns. We use the _drop()_ function to achieve this.
+5. Merge reports according to the common fields. We use the merge() function to achieve the result.
+
+        '''pd.merge(<dataframe1>, <dataframe2>, on=<common_field>)'''
+        
+The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we rename it. We use the _rename()_function.
+
+        '''filename.rename(columns = {'oldaname':'newname'})'''
+
+We merge the customer pin code data frame and the courier invoice data frame using the below code:
+
+            '''# Map the courier invoice and pincode mapping based on Pincode
+                # First drop duplicates from the pincode
+
+                abc_courier = pinCode.drop_duplicates(subset=['Customer Pincode'])
+                courier_abc = invoice[['Order ID', 'Customer        Pincode', 'Type of Shipment']]
+                pincodes = courier_abc.merge(abc_courier,on='Customer Pincode')
+                print(pincodes.head())'''.
+
+###### How it works
+        
+Below is how the invoice and pin code data frame merging code works:
+
+    We first extract the unique customer pin codes from the pincode mapping dataset and create a new DataFrame called “abc_courier” to store this information.
+    We then select specific columns (“Order ID”, “Customer Pincode”, “Type of Shipment”) from the invoice dataset and create a new DataFrame called “courier_abc” to store this subset of data.
+    We then merge the ‘courier_abc’ DataFrame with the ‘abc_courier’ DataFrame based on the ‘Customer Pincode’ column. This merge operation helps us associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named ‘pincodes’.
+
 
