@@ -46,4 +46,9 @@ Below is how the invoice and pin code data frame merging code works:
     We then select specific columns (“Order ID”, “Customer Pincode”, “Type of Shipment”) from the invoice dataset and create a new DataFrame called “courier_abc” to store this subset of data.
     We then merge the ‘courier_abc’ DataFrame with the ‘abc_courier’ DataFrame based on the ‘Customer Pincode’ column. This merge operation helps us associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named ‘pincodes’.
 
+6. Then we calculate the different weight clusters for price determination based on the weight of the shipment.
+###### How the function works
 
+    The function first calculates the remainder of the weight divided by 1 then the value is rounded off to one decimal place. If the remainder is 0.0, it means the weight is a multiple of 1 kg, and the function returns the weight as it is.
+    If the remainder is greater than 0.5, it means that the weight exceeds the next half kg cluster. So the function rounds it to the next integer and adds 1.0 to it, which represents the next heavier slab.
+    If the remainder is less than 0.5  it means the weight falls under the current half kg cluster. Then the function rounds the weight to the nearest integer and adds 0.5 to it., which represents the current weight slab.
