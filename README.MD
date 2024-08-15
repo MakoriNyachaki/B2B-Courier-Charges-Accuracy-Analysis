@@ -11,10 +11,13 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
 ##### Steps
 1. Import the important Python Libraries to be used:
     _Example importing pandas_
+        
         '''import pandas as pd'''
 2. View part of the reports to see and  the structure of the dataset.
+        
         '''pd.read_csv(<file_name>)'''
 3. Look at the missing values in the data. We use the isnull() and sum() functions to determine missing values in each report file.
+        
         '''file_name.isnull().sum()'''
 4. Let us do the data cleaning by dropping the columns missing values. We use the '''drop()''' function to achieve this.
 
