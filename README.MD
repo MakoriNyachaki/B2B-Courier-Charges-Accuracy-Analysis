@@ -1,4 +1,4 @@
-### B2B Ecommerce Fraud: Case Study
+objects### B2B Ecommerce Fraud: Case Study
 
 ##### Problem Statement
 
@@ -58,3 +58,7 @@ Below is how the invoice and pin code data frame merging code works:
     We loop through each row of the 'merged_pincodes' DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
     Then, we determine the weight of the slab for each row. If the shipment type is 'Forward Charges', we calculate the additional weight beyond the baic weight cluster(0.5kg) and apply the corresponding additional charges. For "Forward and RTO Charges" shipmenyts we consider additional charges for term and RTO components.
     Finally, we store the calculated expected charges in the "Expected charges according to ABC" column of the "merged_pincodes" DataFrame. This allows us to compare the exepected charges with the charges billed to analyze the accuracy of the courier company's charges.
+
+
+8. Then Calculate the differences in charges and expected charges for each order.
+9. Summarize the accuracy of B2B courier charges based on the charged prices and expected prices.
