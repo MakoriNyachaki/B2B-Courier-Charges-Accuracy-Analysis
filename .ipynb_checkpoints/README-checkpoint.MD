@@ -1,4 +1,4 @@
-objects### B2B Ecommerce Fraud: Case Study
+### B2B Ecommerce Fraud: Case Study
 
 ##### Problem Statement
 
