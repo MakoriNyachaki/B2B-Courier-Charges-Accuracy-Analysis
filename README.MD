@@ -12,31 +12,31 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
 1. Import the important Python Libraries to be used:
     _Example importing pandas_
         
-        '''import pandas as pd'''
+        ```import pandas as pd```
 2. View part of the reports to see and  the structure of the dataset.
         
-        '''pd.read_csv(<file_name>)'''
+        ```pd.read_csv(<file_name>)```
 3. Look at the missing values in the data. We use the isnull() and sum() functions to determine missing values in each report file.
         
-        '''file_name.isnull().sum()'''
+        ```file_name.isnull().sum()```
 4. Let us do the data cleaning by dropping the unnamed columns. We use the _drop()_ function to achieve this.
 5. Merge reports according to the common fields. We use the merge() function to achieve the result.
 
-        '''pd.merge(<dataframe1>, <dataframe2>, on=<common_field>)'''
+        ```pd.merge(<dataframe1>, <dataframe2>, on=<common_field>)```
         
 The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we rename it. We use the _rename()_function.
 
-        '''filename.rename(columns = {'oldaname':'newname'})'''
+        ```filename.rename(columns = {'oldaname':'newname'})```
 
 We merge the customer pin code data frame and the courier invoice data frame using the below code:
 
-            '''# Map the courier invoice and pincode mapping based on Pincode
+            ```# Map the courier invoice and pincode mapping based on Pincode
                 # First drop duplicates from the pincode
 
                 abc_courier = pinCode.drop_duplicates(subset=['Customer Pincode'])
                 courier_abc = invoice[['Order ID', 'Customer        Pincode', 'Type of Shipment']]
                 pincodes = courier_abc.merge(abc_courier,on='Customer Pincode')
-                print(pincodes.head())'''.
+                print(pincodes.head())```.
 
 ###### How it works
         
@@ -62,6 +62,9 @@ Below is how the invoice and pin code data frame merging code works:
 
 8. Then Calculate the differences in charges and expected charges for each order.
 9. Summarize the accuracy of B2B courier charges based on the charged prices and expected prices.
+
+##### Plot
+![B2B Plot](./b2bplot.png)
 
 #### Conclusion
 B2B courier charges accuracy analysis focuses on assessing the accuracy of fees charged by courier companies for the delivery of goods in B2B transactions. In such problems, we aim to ensure that companies are billed appropriately for the services provided by courier companies. I hope you liked this article on B2B Courier Charges Accuracy Analysis using Python.
