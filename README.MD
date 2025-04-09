@@ -12,7 +12,7 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
 1. Import the important Python Libraries to be used:
     _Example importing pandas_
         
-        ```import pandas as pd```
+        import pandas as pd
 2. View part of the reports to see and  the structure of the dataset.
         
         ```pd.read_csv(<file_name>)```
