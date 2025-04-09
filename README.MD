@@ -64,6 +64,7 @@ Below is how the invoice and pin code data frame merging code worked:
 8. Calculate the differences in charges and expected charges for each order.
 
 ![Differences](./diff.png)
+
 9. Summarize the accuracy of B2B courier charges based on the charged prices and expected prices.
 
 ![Summary](./summary.png)
