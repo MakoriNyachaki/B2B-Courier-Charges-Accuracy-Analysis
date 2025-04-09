@@ -13,13 +13,13 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
     _Example importing pandas_
         
         import pandas as pd
-2. View part of the reports to see and  the structure of the dataset.
+2. I viewed part of the reports to see and  the structure of the dataset.
         
         ```pd.read_csv(<file_name>)```
-3. Look at the missing values in the data. We use the isnull() and sum() functions to determine missing values in each report file.
+3. Look at the missing values in the data. I used the ```isnull()``` and ```sum()``` functions to determine missing values in each report file.
         
         ```file_name.isnull().sum()```
-4. Let us do the data cleaning by dropping the unnamed columns. We use the _drop()_ function to achieve this.
+4. **Data Cleaning:** I dropped the unnamed columns. We use the _drop()_ function to achieve this.
 5. Merge reports according to the common fields. We use the merge() function to achieve the result.
 
         ```pd.merge(<dataframe1>, <dataframe2>, on=<common_field>)```
@@ -28,7 +28,7 @@ The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we ren
 
         ```filename.rename(columns = {'oldaname':'newname'})```
 
-We merge the customer pin code data frame and the courier invoice data frame using the below code:
+- I merged the customer pin code data frame and the courier invoice data frame using the below code:
 
              # Map the courier invoice and pincode mapping based on Pincode
              # First drop duplicates from the pincode
@@ -38,30 +38,33 @@ We merge the customer pin code data frame and the courier invoice data frame usi
              pincodes = courier_abc.merge(abc_courier,on='Customer Pincode')
              print(pincodes.head())
 
-###### How it works
+###### How I did it
         
-Below is how the invoice and pin code data frame merging code works:
+Below is how the invoice and pin code data frame merging code worked:
 
-    We first extract the unique customer pin codes from the pincode mapping dataset and create a new DataFrame called “abc_courier” to store this information.
-    We then select specific columns (“Order ID”, “Customer Pincode”, “Type of Shipment”) from the invoice dataset and create a new DataFrame called “courier_abc” to store this subset of data.
-    We then merge the ‘courier_abc’ DataFrame with the ‘abc_courier’ DataFrame based on the ‘Customer Pincode’ column. This merge operation helps us associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named ‘pincodes’.
+- I extracted the unique customer pin codes from the pincode mapping dataset and created a new DataFrame called “abc_courier” to store this information.
+- I then selected specific columns (“Order ID”, “Customer Pincode”, “Type of Shipment”) from the invoice dataset and created a new DataFrame called “courier_abc” to store this subset of data.
+- I then merged the ‘courier_abc’ DataFrame with the ‘abc_courier’ DataFrame based on the ‘Customer Pincode’ column. This merge operation helped me associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named ‘pincodes’.
 
-6. Then we calculate the different weight clusters for price determination based on the weight of the shipment.
+6. Calculate the different weight clusters for price determination based on the weight of the shipment.
+
 ###### How the function works
 
-    The function first calculates the remainder of the weight divided by 1 then the value is rounded off to one decimal place. If the remainder is 0.0, it means the weight is a multiple of 1 kg, and the function returns the weight as it is.
-    If the remainder is greater than 0.5, it means that the weight exceeds the next half kg cluster. So the function rounds it to the next integer and adds 1.0 to it, which represents the next heavier slab.
-    If the remainder is less than 0.5  it means the weight falls under the current half kg cluster. Then the function rounds the weight to the nearest integer and adds 0.5 to it., which represents the current weight slab.
+- The function first calculates the remainder of the weight divided by 1 then the value is rounded off to one decimal place. If the remainder is 0.0, it means the weight is a multiple of 1 kg, and the function returns the weight as it is.
+- If the remainder is greater than 0.5, it means that the weight exceeds the next half kg cluster. So the function rounds it to the next integer and adds 1.0 to it, which represents the next heavier slab.
+- If the remainder is less than 0.5  it means the weight falls under the current half kg cluster. Then the function rounds the weight to the nearest integer and adds 0.5 to it., which represents the current weight slab.
 
-7. Calculating the Total Costs for Sending and Delivering a Package
+7. Calculate the Total Costs for Sending and Delivering a Package
 ##### How it works
     We loop through each row of the 'merged_pincodes' DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
     Then, we determine the weight of the slab for each row. If the shipment type is 'Forward Charges', we calculate the additional weight beyond the baic weight cluster(0.5kg) and apply the corresponding additional charges. For "Forward and RTO Charges" shipmenyts we consider additional charges for term and RTO components.
     Finally, we store the calculated expected charges in the "Expected charges according to ABC" column of the "merged_pincodes" DataFrame. This allows us to compare the exepected charges with the charges billed to analyze the accuracy of the courier company's charges.
 
 
-8. Then Calculate the differences in charges and expected charges for each order.
+8. Calculate the differences in charges and expected charges for each order.
+![Differences](./diff.png)
 9. Summarize the accuracy of B2B courier charges based on the charged prices and expected prices.
+![Summary](./summary.png)
 
 ##### Plot
 ![B2B Plot](./b2bplot.png)
