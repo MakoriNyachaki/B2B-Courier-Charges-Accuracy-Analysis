@@ -20,11 +20,11 @@ The goal of B2B courier charges accuracy study is to evaluate how accurately cou
         
         ```file_name.isnull().sum()```
 4. **Data Cleaning:** I dropped the unnamed columns. We use the _drop()_ function to achieve this.
-5. Merge reports according to the common fields. We use the merge() function to achieve the result.
+5. Merge reports according to the common fields. I used the ```merge()``` function to achieve the result.
 
         ```pd.merge(<dataframe1>, <dataframe2>, on=<common_field>)```
         
-The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we rename it. We use the _rename()_function.
+The _ExternalOrderNo_ is nothing but the _\_Order Id_ in other datasets. So we rename it. We use the _rename()_function.
 
         ```filename.rename(columns = {'oldaname':'newname'})```
 
@@ -42,9 +42,9 @@ The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we ren
         
 Below is how the invoice and pin code data frame merging code worked:
 
-- I extracted the unique customer pin codes from the pincode mapping dataset and created a new DataFrame called “abc_courier” to store this information.
-- I then selected specific columns (“Order ID”, “Customer Pincode”, “Type of Shipment”) from the invoice dataset and created a new DataFrame called “courier_abc” to store this subset of data.
-- I then merged the ‘courier_abc’ DataFrame with the ‘abc_courier’ DataFrame based on the ‘Customer Pincode’ column. This merge operation helped me associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named ‘pincodes’.
+- I extracted the unique customer pin codes from the pincode mapping dataset and created a new DataFrame called _abc_courier”_to store this information.
+- I then selected specific columns _(“Order ID”, “Customer Pincode”, “Type of Shipment”)_ from the invoice dataset and created a new DataFrame called “courier_abc” to store this subset of data.
+- I then merged the ‘courier_abc’ DataFrame with the _abc_courier_ DataFrame based on the _Customer Pincode_ column. This merge operation helped me associate customer pin codes with their respective orders and shipping types. The resulting DataFrame is named _pincodes_.
 
 6. Calculate the different weight clusters for price determination based on the weight of the shipment.
 
@@ -56,9 +56,9 @@ Below is how the invoice and pin code data frame merging code worked:
 
 7. Calculate the Total Costs for Sending and Delivering a Package
 ##### How it works
-    We loop through each row of the 'merged_pincodes' DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
-    Then, we determine the weight of the slab for each row. If the shipment type is 'Forward Charges', we calculate the additional weight beyond the baic weight cluster(0.5kg) and apply the corresponding additional charges. For "Forward and RTO Charges" shipmenyts we consider additional charges for term and RTO components.
-    Finally, we store the calculated expected charges in the "Expected charges according to ABC" column of the "merged_pincodes" DataFrame. This allows us to compare the exepected charges with the charges billed to analyze the accuracy of the courier company's charges.
+- I looped through each row of the 'merged_pincodes' DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
+- Then, I determined the weight of the slab for each row. If the shipment type is 'Forward Charges', we calculate the additional weight beyond the base weight cluster(0.5kg) and apply the corresponding additional charges. For _Forward and RTO Charges_ shipments we consider additional charges for term and RTO components.
+- Finally, I stored the calculated expected charges in the _Expected charges according to ABC_ column of the _merged_pincodes_ DataFrame. This allowss for comparisons of the exepected charges with the charges billed to analyze the accuracy of the courier company's charges.
 
 
 8. Calculate the differences in charges and expected charges for each order.
