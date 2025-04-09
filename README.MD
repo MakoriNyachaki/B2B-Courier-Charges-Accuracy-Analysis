@@ -30,13 +30,13 @@ The _ExternalOrderNo_ is nothing but the _Order Id' in other datasets. So we ren
 
 We merge the customer pin code data frame and the courier invoice data frame using the below code:
 
-            ```# Map the courier invoice and pincode mapping based on Pincode
-                # First drop duplicates from the pincode
+             # Map the courier invoice and pincode mapping based on Pincode
+             # First drop duplicates from the pincode
 
-                abc_courier = pinCode.drop_duplicates(subset=['Customer Pincode'])
-                courier_abc = invoice[['Order ID', 'Customer        Pincode', 'Type of Shipment']]
-                pincodes = courier_abc.merge(abc_courier,on='Customer Pincode')
-                print(pincodes.head())```.
+             abc_courier = pinCode.drop_duplicates(subset=['Customer Pincode'])
+             courier_abc = invoice[['Order ID', 'Customer        Pincode', 'Type of Shipment']]
+             pincodes = courier_abc.merge(abc_courier,on='Customer Pincode')
+             print(pincodes.head())
 
 ###### How it works
         
