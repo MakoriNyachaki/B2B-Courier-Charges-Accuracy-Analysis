@@ -56,17 +56,20 @@ Below is how the invoice and pin code data frame merging code worked:
 
 7. Calculate the Total Costs for Sending and Delivering a Package
 ##### How it works
-- I looped through each row of the 'merged_pincodes' DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
-- Then, I determined the weight of the slab for each row. If the shipment type is 'Forward Charges', we calculate the additional weight beyond the base weight cluster(0.5kg) and apply the corresponding additional charges. For _Forward and RTO Charges_ shipments we consider additional charges for term and RTO components.
+- I looped through each row of the _merged_pincodes_ DataFrame to calculate expected charges based on ABC's tariffs. We retrieve the necessary rates and parameters, such as fixed charges and surcharges per weight tier for forward and RTO shipments, based on the delivery area.
+- Then, I determined the weight of the slab for each row. If the shipment type is _Forward Charges_, we calculate the additional weight beyond the base weight cluster(0.5kg) and apply the corresponding additional charges. For _Forward and RTO Charges_ shipments we consider additional charges for term and RTO components.
 - Finally, I stored the calculated expected charges in the _Expected charges according to ABC_ column of the _merged_pincodes_ DataFrame. This allowss for comparisons of the exepected charges with the charges billed to analyze the accuracy of the courier company's charges.
 
 
 8. Calculate the differences in charges and expected charges for each order.
+
 ![Differences](./diff.png)
 9. Summarize the accuracy of B2B courier charges based on the charged prices and expected prices.
+
 ![Summary](./summary.png)
 
 ##### Plot
+
 ![B2B Plot](./b2bplot.png)
 
 #### Conclusion
